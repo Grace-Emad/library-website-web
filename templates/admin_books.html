@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/queries.css">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
+    <meta charset="UTF-8">
+    <title>Admin - Complete Book List</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="iconName">
+            <img src="../images/icon.png" alt="icon" width="30px">
+            <b><a href="../index.html" style="color: inherit; text-decoration: none;">Online Library</a></b>
+        </div>
+        <ul class="pageOptions" id="navLinks"></ul>
+        <div id="beforeAuth" class="logContainer hidden">
+            <a href="login.html" class="navbarBtns">Login</a>
+            <a href="signup.html" class="navbarBtns">Sign Up</a>
+        </div>
+        <div id="afterAuth" class="logContainer hidden">
+            <span id="userGreeting" style="margin-right: 15px;"></span>
+            <button id="logOutBtn" class="navbarBtns">Log Out</button>
+        </div>
+    </nav>
+    <main class="container">
+        <h2>Available & Borrowed Books</h2>
+        
+        <input type="text" id="searchInput" placeholder="Search for books...">
+        <br><br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
+    </main>
+    
+    <script src="../js/admin.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* Fixed responsive design to prevent microscopic text and broken layouts */
+
+@media (max-width: 72rem) {
+    .cards {
+        flex-wrap: wrap; /* Allow image cards to wrap naturally */
+    }
+    .footer {
+        margin: 0 auto;
+        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 51rem) {
+    .navbar {
+        flex-direction: column; /* Stack the navbar items on smaller screens */
+        gap: 15px;
+    }
+    .cards {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width: 43rem) {
+    .img {
+        width: 120px; /* Shrink images gracefully for mobile */
+    }
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    .pageOptions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+}
+
+@media (max-width: 34rem) {
+    .img {
+        width: 100px;
+    }
+    .logContainer {
+        flex-direction: column;
+        width: 100%;
+    }
+    .logContainer .navbarBtns {
+        width: 100%;
+        text-align: center;
+        display: block;
+        box-sizing: border-box;
+    }
+}

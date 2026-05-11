@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../images/icon.png">
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/queries.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="iconName">
+            <img src="../images/icon.png" alt="icon" width="30px">
+            <b><a href="../index.html" style="color: inherit; text-decoration: none;">Online Library</a></b>
+        </div>
+        <ul class="pageOptions" id="navLinks"></ul>
+        <div id="beforeAuth" class="logContainer hidden">
+            <a href="login.html" class="navbarBtns">Login</a>
+            <a href="signup.html" class="navbarBtns">Sign Up</a>
+        </div>
+        <div id="afterAuth" class="logContainer hidden">
+            <span id="userGreeting" style="margin-right: 15px;"></span>
+            <button id="logOutBtn" class="navbarBtns">Log Out</button>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="form-container">
+            <div class="headings">
+                <h2 class="lobsterFont">Sign Up</h2>
+            </div>
+            <form action="#" id="signUpForm">
+                <input type="text" id="username" name="username" placeholder="Username" required class="formInput"><br><br>
+
+                <input type="password" id="password" name="password" placeholder="Password" required minlength="6" class="formInput">
+                <br><br>
+
+                <input type="password" id="confPass" name="confPass" placeholder="Confirm Password" required minlength="6" class="formInput">
+                <p id="confPassError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
+                <br><br>
+
+                <input type="email" id="email" name="email" placeholder="Email" required class="formInput">
+                <p id="emailError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
+                <br>
+
+                <div class="checkbox-wrapper">
+                    <label for="isAdmin">is Admin</label>
+                    <input type="checkbox" id="isAdmin" name="isAdmin">
+                </div>
+                <br>
+
+                <p id="signUpError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
+
+                <input type="submit" value="Sign Up" id="signUpSubmit" class="btn">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </form>
+        </section>
+    </main>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

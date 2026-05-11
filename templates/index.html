@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Online Library - Home{% endblock %}</title>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="iconName">
+            <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+            <b>Online Library</b>
+        </div>
+        <ul class="pageOptions" id="navLinks">
+            <!-- Dynamically injected links based on role -->
+        </ul>
+        <div id="beforeAuth" class="logContainer hidden">
+            <a href="{% url 'login' %}" class="navbarBtns">Login</a>
+            <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
+        </div>
+
+        <div id="afterAuth" class="logContainer hidden">
+            <span id="userGreeting" style="margin-right: 15px;"></span>
+            <button id="logOutBtn" class="navbarBtns">Log Out</button>
+        </div>
+    </nav>
+    {% block content %}
+    <main class="container" id="homeContainer">
+        <div class="homeWelcome">
+            <h1>Welcome to the Online Library</h1>
+            <p class="headerText">Discover a world of knowledge. Search our catalog, borrow your favorite books, and manage your reading list all in one place.</p>
+        </div>
+        <div class="cards">
+            <a href="">
+                <img src="{% static 'images/img1.jpg' %}" alt="programming book" class="img">
+            </a>
+            <a href="{% url 'search' %}">
+                <img src="{% static 'images/img2.jpg' %}" alt="coding book" class="img">
+            </a>
+            <a href="{% url 'search' %}">
+                <img src="{% static 'images/img3.jpg' %}" alt="literature book" class="img">
+            </a>
+            <a href="{% url 'search' %}">
+                <img src="{% static 'images/img4.jpg' %}" alt="literature book" class="img">
+            </a>
+            <a href="{% url 'search' %}">
+                <img src="{% static 'images/img5.jpg' %}" alt="kids coloring book" class="img">
+            </a>
+
+        </div>
+        {% endblock %}
+    </main>
+    <footer>
+        <div class="footer">
+            <div class="iconName">
+                <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+                <b>Online Library</b>
+            </div>
+            <p>@2026 FCAI. all rights reserved </p>
+            <p>Terms of Services</p>
+            <div class="socialMediaIcons">
+                <img src="{% static 'images/facebook.png' %}" alt="Facebook icon" width="40px">
+                <img src="{% static 'images/twitter.png' %}" alt="Twitter icon" width="30px">
+                <img src="{% static 'images/instagram.png' %}" alt="Instagram icon" width="30px">
+            </div>
+        </div>
+
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
