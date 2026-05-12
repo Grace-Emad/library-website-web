@@ -87,9 +87,9 @@ p {
     align-items: center;
 }
 
-.hidden {
-    display: none !important;
-}
+/*.hidden {*/
+/*    display: none !important;*/
+/*}*/
 
 .brand {
     font-weight: 700;
@@ -141,6 +141,7 @@ textarea {
 .error {
     color: var(--error-color);
     font-size: 0.9rem;
+    display: block;
 }
 
 article {

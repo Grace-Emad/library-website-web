@@ -1,25 +1,27 @@
+{% extends 'index.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="../images/icon.png">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/queries.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}">
 </head>
 <body>
     <nav class="navbar">
         <div class="iconName">
-            <img src="../images/icon.png" alt="icon" width="30px">
-            <b><a href="../index.html" style="color: inherit; text-decoration: none;">Online Library</a></b>
+            <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+            <b><a href="{% url 'home' %}" style="color: inherit; text-decoration: none;">Online Library</a></b>
         </div>
         <ul class="pageOptions" id="navLinks"></ul>
         <div id="beforeAuth" class="logContainer hidden">
-            <a href="login.html" class="navbarBtns">Login</a>
-            <a href="signup.html" class="navbarBtns">Sign Up</a>
+            <a href="{% url 'login' %}" class="navbarBtns">Login</a>
+            <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
         </div>
         <div id="afterAuth" class="logContainer hidden">
             <span id="userGreeting" style="margin-right: 15px;"></span>
@@ -27,22 +29,23 @@
         </div>
     </nav>
     <main class="container">
+        {% block content %}
         <section class="form-container">
             <div class="headings">
                 <h2 class="lobsterFont">Sign Up</h2>
             </div>
-            <form action="#" id="signUpForm">
-                <input type="text" id="username" name="username" placeholder="Username" required class="formInput"><br><br>
+            <form action="#" id="signUpForm" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <input type="text" id="username" name="username" placeholder="Username" class="formInput" autocomplete="one-time-code"><br><br>
 
-                <input type="password" id="password" name="password" placeholder="Password" required minlength="6" class="formInput">
+                <input type="password" id="password" name="password" placeholder="Password" minlength="6" class="formInput" autocomplete="new-password">
                 <br><br>
 
-                <input type="password" id="confPass" name="confPass" placeholder="Confirm Password" required minlength="6" class="formInput">
+                <input type="password" id="confPass" name="confirm_password" placeholder="Confirm Password" minlength="6" class="formInput">
                 <p id="confPassError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
                 <br><br>
 
-                <input type="email" id="email" name="email" placeholder="Email" required class="formInput">
-                <p id="emailError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
+                <input type="email" id="email" name="email" placeholder="Email" class="formInput">
                 <br>
 
                 <div class="checkbox-wrapper">
@@ -51,14 +54,22 @@
                 </div>
                 <br>
 
-                <p id="signUpError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
-
+                {% if messages %}
+                    <ul class="errorMessages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} class="error">
+                        {{ message }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
                 <input type="submit" value="Sign Up" id="signUpSubmit" class="btn">
-                <p>Already have an account? <a href="login.html">Login</a></p>
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
             </form>
         </section>
+        {% endblock %}
     </main>
-    <script src="../js/auth.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

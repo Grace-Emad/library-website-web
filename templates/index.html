@@ -18,18 +18,38 @@
         <ul class="pageOptions" id="navLinks">
             <!-- Dynamically injected links based on role -->
         </ul>
-        <div id="beforeAuth" class="logContainer hidden">
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <div>
+                    <a href="{% url 'admin_books' %}">Manage Books</a>
+                    <a href=""{% url 'add_book' %}>Add Book</a>
+                </div>
+
+            {% else %}
+                <div>
+                    <a href="{% url 'search' %}">Search for Books</a>
+                    <a href="{% url 'borrowed_books' %}">My Borrowed Books</a>
+                </div>
+            {% endif %}
+            <div>
+                <h1>Welcome, {{ user.username }}</h1>
+                <a href="{% url 'logout' %}" class="navbarBtns">Logout</a>
+            </div>
+        {% else %}
+            <div id="beforeAuth">
             <a href="{% url 'login' %}" class="navbarBtns">Login</a>
             <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
-        </div>
+            </div>
+        {% endif %}
 
-        <div id="afterAuth" class="logContainer hidden">
-            <span id="userGreeting" style="margin-right: 15px;"></span>
-            <button id="logOutBtn" class="navbarBtns">Log Out</button>
-        </div>
+{##}
+{#        <div id="afterAuth" class="logContainer hidden">#}
+{#            <span id="userGreeting" style="margin-right: 15px;"></span>#}
+{#            <button id="logOutBtn" class="navbarBtns">Log Out</button>#}
+{#        </div>#}
     </nav>
-    {% block content %}
     <main class="container" id="homeContainer">
+        {% block content %}
         <div class="homeWelcome">
             <h1>Welcome to the Online Library</h1>
             <p class="headerText">Discover a world of knowledge. Search our catalog, borrow your favorite books, and manage your reading list all in one place.</p>
