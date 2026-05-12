@@ -1,6 +1,8 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Book
 
 # Create your views here.
 def home(request):
@@ -25,4 +27,42 @@ def add_book(request):
 @staff_member_required
 def edit_book(request, book_id):
     return render(request, 'edit_book.html')
+# Add Book
+def add_book(request):
 
+    if request.method == "POST":
+
+        title = request.POST.get("title")
+        author = request.POST.get("author")
+        category = request.POST.get("category")
+        description = request.POST.get("description")
+
+        Book.objects.create(
+            title=title,
+            author=author,
+            category=category,
+            description=description
+        )
+
+        return redirect("add_book")
+
+    return render(request, "add_book.html")
+
+
+# Edit Book
+def edit_book(request, id):
+
+    book = Book.objects.get(id=id)
+
+    if request.method == "POST":
+
+        book.title = request.POST.get("title")
+        book.author = request.POST.get("author")
+        book.category = request.POST.get("category")
+        book.description = request.POST.get("description")
+
+        book.save()
+
+        return redirect("edit_book", id=id)
+
+    return render(request, "edit_book.html", {"book": book})
