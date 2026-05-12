@@ -6,5 +6,4 @@ from accounts.models import CustomUser
 
 # Register your models here.
 admin.site.register(CustomUser, UserAdmin)
-from .models import Book
-admin.site.register(Book)
+
