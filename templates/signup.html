@@ -13,21 +13,6 @@
     <link rel="stylesheet" href="{% static 'css/queries.css' %}">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="iconName">
-            <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
-            <b><a href="{% url 'home' %}" style="color: inherit; text-decoration: none;">Online Library</a></b>
-        </div>
-        <ul class="pageOptions" id="navLinks"></ul>
-        <div id="beforeAuth" class="logContainer hidden">
-            <a href="{% url 'login' %}" class="navbarBtns">Login</a>
-            <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
-        </div>
-        <div id="afterAuth" class="logContainer hidden">
-            <span id="userGreeting" style="margin-right: 15px;"></span>
-            <button id="logOutBtn" class="navbarBtns">Log Out</button>
-        </div>
-    </nav>
     <main class="container">
         {% block content %}
         <section class="form-container">
@@ -42,16 +27,13 @@
                 <br><br>
 
                 <input type="password" id="confPass" name="confirm_password" placeholder="Confirm Password" minlength="6" class="formInput">
+                <br><br>
+                <input type="number" id="phone" name="phone" placeholder="phone number" minlength="10" class="formInput">
+
                 <p id="confPassError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
                 <br><br>
 
                 <input type="email" id="email" name="email" placeholder="Email" class="formInput">
-                <br>
-
-                <div class="checkbox-wrapper">
-                    <label for="isAdmin">is Admin</label>
-                    <input type="checkbox" id="isAdmin" name="isAdmin">
-                </div>
                 <br>
 
                 {% if messages %}
@@ -69,7 +51,5 @@
         </section>
         {% endblock %}
     </main>
-    <script src="{% static 'js/auth.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

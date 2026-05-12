@@ -197,6 +197,12 @@ h4 {
     display: flex;
     gap: 1rem;
     align-items: center;
+    justify-content: center;
+}
+
+.userGreeting {
+    font-weight: 700;
+    margin-bottom: 0;
 }
 
 table {
@@ -224,18 +230,25 @@ th {
     justify-content: center;
     align-items: center;
     position: absolute;
-    transform: translate(50%, 10%);
+    transform: translate(50%, 30%);
     right: 50%;
     top: 5%;
     border: 2px solid var(--primary-color);
     border-radius: 10%;
     padding: 5rem;
+
 }
 .formContainer a {
     color: var(--secondary-color);
 }
 .formContainer a:hover {
     color: var(--primary-color);
+}
+
+.profileForm {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .checkBox-wrapper {
@@ -267,6 +280,10 @@ th {
 
 .errorMessages {
     color: #e74c3c;
+}
+
+.okay_messages {
+    color: #1ac30a;
 }
 
 .homeWelcome {

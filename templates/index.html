@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/queries.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}?v=1.1">
     <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
     <meta charset="UTF-8">
     <title>{% block title %}Online Library - Home{% endblock %}</title>
@@ -12,41 +12,39 @@
 
     <nav class="navbar">
         <div class="iconName">
-            <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+            </a>
             <b>Online Library</b>
         </div>
-        <ul class="pageOptions" id="navLinks">
-            <!-- Dynamically injected links based on role -->
-        </ul>
         {% if user.is_authenticated %}
             {% if user.is_staff %}
-                <div>
+                <div class="pageOptions">
                     <a href="{% url 'admin_books' %}">Manage Books</a>
                     <a href=""{% url 'add_book' %}>Add Book</a>
+                    <a href="{% url 'profile' %}">Profile</a>
                 </div>
 
             {% else %}
-                <div>
+                <div class="pageOptions">
                     <a href="{% url 'search' %}">Search for Books</a>
                     <a href="{% url 'borrowed_books' %}">My Borrowed Books</a>
+                    <a href="{% url 'profile' %}">Profile</a>
                 </div>
             {% endif %}
-            <div>
-                <h1>Welcome, {{ user.username }}</h1>
+            <div class="logContainer">
+                <p class="userGreeting">Welcome, {{ user.username }}</p>
                 <a href="{% url 'logout' %}" class="navbarBtns">Logout</a>
             </div>
         {% else %}
-            <div id="beforeAuth">
+            <div>
+                <a href="{% url 'search' %}">Explore Catalog</a>
+            </div>
+            <div class="logContainer">
             <a href="{% url 'login' %}" class="navbarBtns">Login</a>
             <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
             </div>
         {% endif %}
-
-{##}
-{#        <div id="afterAuth" class="logContainer hidden">#}
-{#            <span id="userGreeting" style="margin-right: 15px;"></span>#}
-{#            <button id="logOutBtn" class="navbarBtns">Log Out</button>#}
-{#        </div>#}
     </nav>
     <main class="container" id="homeContainer">
         {% block content %}
@@ -90,6 +88,6 @@
         </div>
 
     </footer>
-    <script src="{% static 'js/main.js' %}"></script>
+{#    <script src="{% static 'js/main.js' %}"></script>#}
 </body>
 </html>

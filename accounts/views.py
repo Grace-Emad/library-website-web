@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+
+from .forms import ProfileForm
 from .models import CustomUser
 
 
@@ -39,6 +42,8 @@ def signup_view(request):
             return render(request, 'signup.html')
         if CustomUser.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
+        if CustomUser.objects.filter(phone=phone).exists():
+            messages.error(request, "Phone number already exists!")
             return render(request, 'signup.html')
 
         user = CustomUser.objects.create_user(
@@ -55,5 +60,19 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')
+    else:
+        form = ProfileForm(instance=request.user)
+
+    return render(request, 'profile.html', {'form': form})
+
 
 
