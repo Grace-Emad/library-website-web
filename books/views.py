@@ -11,7 +11,7 @@ def home(request):
 def search_books(request):
     return render(request, 'search_books.html')
 
-def book_details(request, pk):
+def book_details_view(request, pk):
     return render(request, 'book_details.html')
 
 @login_required
