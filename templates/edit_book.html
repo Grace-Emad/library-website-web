@@ -11,6 +11,7 @@
 <body>
 
     <nav class="navbar">
+
         <div class="iconName">
             <img src="../images/icon.png" alt="icon" width="30px">
 
@@ -33,6 +34,7 @@
             <span id="userGreeting" style="margin-right: 15px;"></span>
             <button id="logOutBtn" class="navbarBtns">Log Out</button>
         </div>
+
     </nav>
 
     <main class="container">
@@ -46,26 +48,32 @@
                 {% csrf_token %}
 
                 <label>Book ID</label><br>
+
                 <input type="text"
                        value="{{ book.id }}"
                        class="formInput"
                        readonly>
+
                 <br><br>
 
                 <label>Book Name</label><br>
+
                 <input type="text"
                        name="title"
                        value="{{ book.title }}"
                        class="formInput"
                        required>
+
                 <br><br>
 
                 <label>Author</label><br>
+
                 <input type="text"
                        name="author"
                        value="{{ book.author }}"
                        class="formInput"
                        required>
+
                 <br><br>
 
                 <label>Category</label><br>
@@ -119,8 +127,6 @@
     </main>
 
     <script src="../js/main.js"></script>
-    </body>
-</html>
 
 </body>
 </html>
