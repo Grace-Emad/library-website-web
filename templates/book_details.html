@@ -11,6 +11,22 @@
         <p>{{ book.description }}</p>
 
         <div style="margin-top: 20px;">
+            {% if current_user_record %}
+                <form method="POST" action="{% url 'return_book' current_user_record.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Return Book</button>
+                </form>
+            {% elif user.is_authenticated and book.status == 'available' %}
+                <form method="POST" action="{% url 'borrow_book' book.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Borrow This Book</button>
+                </form>
+            {% elif not user.is_authenticated %}
+                <a href="{% url 'login' %}" class="btn">Login to Borrow</a>
+            {% elif active_borrow %}
+                <p>This book is currently borrowed by another user.</p>
+            {% endif %}
+
             <a href="{% url 'search' %}" class="btn">Back to Search</a>
         </div>
     </section>

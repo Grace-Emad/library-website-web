@@ -28,6 +28,10 @@
                     <td>{{ book.status }}</td>
                     <td>
                         <a href="{% url 'edit_book' book.id %}" class="btn">Edit</a>
+                        <form method="POST" action="{% url 'delete_book' book.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Delete</button>
+                        </form>
                     </td>
                 </tr>
             {% empty %}

@@ -4,8 +4,28 @@
 <main class="container">
     <section class="form-container">
         <h2>My Borrowed Books</h2>
-        <p>This page will show each user’s real borrowed books once the borrowing backend is added in the next phase.</p>
-        <a href="{% url 'search' %}" class="btn">Browse Books</a>
+
+        {% if borrow_records %}
+            {% for record in borrow_records %}
+                <article class="book-card" style="margin-bottom: 20px;">
+                    <h3>{{ record.book.title }}</h3>
+                    <p><strong>Author:</strong> {{ record.book.author }}</p>
+                    <p><strong>Category:</strong> {{ record.book.category }}</p>
+                    <p><strong>Borrowed On:</strong> {{ record.borrowed_at|date:"M d, Y" }}</p>
+                    <p><strong>Due Date:</strong> {{ record.due_date|date:"M d, Y" }}</p>
+                    <div style="margin-top: 12px;">
+                        <a href="{% url 'book_detail' record.book.id %}" class="btn">View Book</a>
+                        <form method="POST" action="{% url 'return_book' record.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn">Return Book</button>
+                        </form>
+                    </div>
+                </article>
+            {% endfor %}
+        {% else %}
+            <p>You do not have any borrowed books right now.</p>
+            <a href="{% url 'search' %}" class="btn">Browse Books</a>
+        {% endif %}
     </section>
 </main>
 {% endblock %}

@@ -48,6 +48,16 @@
         {% endif %}
     </nav>
 
+    {% if messages %}
+        <section class="container">
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
     {% block content %}
     <main class="container" id="homeContainer">
 
