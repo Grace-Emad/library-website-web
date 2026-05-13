@@ -1,20 +1,19 @@
-/* Fixed responsive design to prevent microscopic text and broken layouts */
-
 @media (max-width: 72rem) {
     .cards {
-        flex-wrap: wrap; /* Allow image cards to wrap naturally */
+        flex-wrap: wrap;
     }
     .footer {
-        margin: 0 auto;
+        margin: 0 10px 10px;
         gap: 2rem;
         flex-wrap: wrap;
         padding: 2rem;
+        width: auto;
     }
 }
 
 @media (max-width: 51rem) {
     .navbar {
-        flex-direction: column; /* Stack the navbar items on smaller screens */
+        flex-direction: column;
         gap: 15px;
     }
     .cards {
@@ -26,7 +25,7 @@
 
 @media (max-width: 43rem) {
     .img {
-        width: 120px; /* Shrink images gracefully for mobile */
+        width: 120px;
     }
     .container {
         margin: 10px;
@@ -36,6 +35,9 @@
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
+    }
+    .search-bar {
+        flex-direction: column;
     }
 
 }

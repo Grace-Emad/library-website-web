@@ -5,3 +5,4 @@
 .ruff_cache/
 .idea/**/__pycache__/
 */migrations/__pycache__
+db.sqlite3

@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
-    {% block content %}
+{% block content %}
     <main class="container">
             <section class="form-container">
             <form method="POST" enctype="multipart/form-data">
@@ -35,15 +35,6 @@
                 <button type="submit" class="btn">Update</button>
             <br><br>
             </form>
-                {% if user.is_staff %}
-                <div>
-                    <a href="{% url 'admin_books' %}" class="btn">Manage Books</a>
-                </div>
-                <br>
-                <div>
-                    <a href="{% url 'add_admin' %}" class="btn">Add Admin</a>
-                </div>
-                {% endif %}
             </section>
     </main>
-    {% endblock %}
+{% endblock %}

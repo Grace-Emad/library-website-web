@@ -1,7 +1,6 @@
 {% extends 'index.html' %}
-{% load static %}
-<body>
-    {% block content %}
+
+{% block content %}
     <main class="container">
 
         <section class="form-container">
@@ -10,28 +9,26 @@
             </div>
             <form action="#" id="signUpForm" method="POST" autocomplete="off">
                 {% csrf_token %}
-                <input type="text" id="username" name="username" placeholder="Username" class="formInput" autocomplete="one-time-code"><br><br>
+                <input type="text" id="username" name="username" placeholder="Username" class="formInput" autocomplete="one-time-code" value="{{ form_data.username|default:'' }}"><br><br>
 
                 <input type="password" id="password" name="password" placeholder="Password" minlength="6" class="formInput" autocomplete="new-password">
                 <br><br>
 
                 <input type="password" id="confPass" name="confirm_password" placeholder="Confirm Password" minlength="6" class="formInput">
                 <br><br>
-                <input type="number" id="phone" name="phone" placeholder="phone number" minlength="10" class="formInput">
+                <input type="number" id="phone" name="phone" placeholder="phone number" minlength="10" class="formInput" value="{{ form_data.phone|default:'' }}">
 
                 <p id="confPassError" class="errorMessages" style="display:none; color: var(--error-color);"></p>
                 <br><br>
 
-                <input type="email" id="email" name="email" placeholder="Email" class="formInput">
+                <input type="email" id="email" name="email" placeholder="Email" class="formInput" value="{{ form_data.email|default:'' }}">
                 <br>
 
                 {% if messages %}
                     <ul class="errorMessages">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} class="error">
-                        {{ message }}
-                        </li>
-                    {% endfor %}
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
                     </ul>
                 {% endif %}
                 <input type="submit" value="Sign Up" id="signUpSubmit" class="btn">
@@ -40,5 +37,4 @@
         </section>
 
     </main>
-    {% endblock %}
-</body>
+{% endblock %}

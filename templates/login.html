@@ -1,25 +1,21 @@
 {% extends 'index.html' %}
-{% load static %}
-<body>
-{% block content %}
-    <main class="container backgroundImg">
 
+{% block content %}
+    <main class="container">
         <section class="form-container">
             <h2 class="lobsterFont">Login</h2>
             <form id="loginForm" action="" method="POST" autocomplete="off">
                 {% csrf_token %}
-                <input type="text" id="username" name="username" placeholder="username" required class="formInput"><br><br>
+                <input type="text" id="username" name="username" placeholder="username" required class="formInput" value="{{ entered_username|default:'' }}"><br><br>
 
                 <input type="password" id="password" name="password" placeholder="password" required minlength="6" class="formInput">
                 <br><br>
                 {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} class="error">
-                            {{ message }}
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <ul class="errorMessages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
 
                 <input type="submit" value="Login" id="loginSubmit" class="btn">
@@ -30,4 +26,3 @@
 
     </main>
 {% endblock %}
-</body>

@@ -16,12 +16,13 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    background-image: url("../images/background.jpg");
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
+        url("../images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white overlay */
-    background-blend-mode: lighten;
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -102,10 +103,6 @@ p {
     align-items: center;
 }
 
-/*.hidden {*/
-/*    display: none !important;*/
-/*}*/
-
 .brand {
     font-weight: 700;
     color: var(--primary-color);
@@ -113,6 +110,7 @@ p {
 }
 
 .btn {
+    display: inline-block;
     background-color: var(--secondary-color);
     color: white;
     padding: 10px 15px;
@@ -121,11 +119,17 @@ p {
     cursor: pointer;
     font-weight: 600;
     box-sizing: border-box;
-    width: 100%
+    width: auto;
+    text-align: center;
+}
+
+.btn:visited {
+    color: white;
 }
 
 .btn:hover {
     background-color: var(--primary-color);
+    color: white;
 }
 
 .form-group {
@@ -137,10 +141,13 @@ p {
 
 input,
 select,
-textarea,
-button {
+textarea {
     font: inherit;
     width: 100%
+}
+
+button {
+    font: inherit;
 }
 
 input,
@@ -238,26 +245,115 @@ th {
     background-color: #f2f2f2;
 }
 
+.form-container,
 .formContainer {
     min-width: 450px;
+    max-width: 900px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    transform: translate(50%, 30%);
-    right: 50%;
-    top: 5%;
+    justify-content: flex-start;
+    align-items: stretch;
     border: 2px solid var(--primary-color);
-    border-radius: 10%;
-    padding: 5rem;
-
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 0 auto;
+    background: #fff;
 }
+
+.form-container > .btn,
+.formContainer > .btn {
+    align-self: flex-start;
+}
+
+.form-container a,
 .formContainer a {
     color: var(--secondary-color);
 }
+
+.form-container a.btn,
+.formContainer a.btn {
+    color: #fff;
+}
+
+.form-container a:hover,
 .formContainer a:hover {
     color: var(--primary-color);
+}
+
+.form-container a.btn:hover,
+.formContainer a.btn:hover,
+.form-container a.btn:visited,
+.formContainer a.btn:visited {
+    color: #fff;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.search-bar input {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.search-bar .btn {
+    white-space: nowrap;
+    align-self: stretch;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: rgba(44, 62, 80, 0.96);
+    color: #f8fafc;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+    width: min(1000px, calc(100% - 22px));
+    margin: 0 auto 12px;
+    border-radius: 8px;
+}
+
+.iconName {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer .iconName,
+.footer p {
+    color: #f8fafc;
+    margin: 0;
+}
+
+.socialMediaIcons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .profile_container {
@@ -280,7 +376,7 @@ th {
     width: 16px;
     height: 16px;
     cursor: pointer;
-    accent-color: var(--secondary-color); /* Blue color */
+    accent-color: var(--secondary-color);
 }
 
 .checkbox-wrapper label {

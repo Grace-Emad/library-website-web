@@ -7,8 +7,6 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 
 from .models import Book, BorrowRecord
-
-# Create your views here.
 def home(request):
     return render(request, 'index.html')
 
@@ -115,7 +113,6 @@ def return_book(request, borrow_id):
 def admin_books(request):
     books = Book.objects.all().order_by('title')
     return render(request, 'admin_books.html', {'books': books})
-# Add Book
 @staff_member_required(login_url='login')
 def add_book(request):
 
@@ -136,9 +133,6 @@ def add_book(request):
         return redirect("add_book")
 
     return render(request, "add_book.html")
-
-
-# Edit Book
 @staff_member_required(login_url='login')
 def edit_book(request, id):
 

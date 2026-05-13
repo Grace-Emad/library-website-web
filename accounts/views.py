@@ -7,22 +7,23 @@ from django.shortcuts import render, redirect
 from .forms import AdminCreationForm, ProfileForm
 from .models import CustomUser
 
-
-# Create your views here.
 def login_view(request):
+    context = {}
     if request.method == 'POST':
-        username = request.POST.get('username')
+        username = request.POST.get('username', '').strip()
         password = request.POST.get('password')
+        context['entered_username'] = username
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
         messages.error(request, 'Invalid credentials')
-    return render(request, 'login.html')
+    return render(request, 'login.html', context)
 
 
 def signup_view(request):
+    context = {'form_data': {}}
     if request.method == 'POST':
         data = request.POST
         username = data.get('username', '').strip()
@@ -30,22 +31,27 @@ def signup_view(request):
         confirm = data.get('confirm_password', '')
         email = data.get('email', '').strip()
         phone = data.get('phone', '').strip()
+        context['form_data'] = {
+            'username': username,
+            'email': email,
+            'phone': phone,
+        }
 
         if not all([username, email, password, confirm]):
             messages.error(request, "Please enter all fields")
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', context)
         if password != confirm:
             messages.error(request, "Passwords do not match")
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', context)
         if CustomUser.objects.filter(username=username).exists():
             messages.error(request, "Username already exists!")
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', context)
         if CustomUser.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', context)
         if CustomUser.objects.filter(phone=phone).exists():
             messages.error(request, "Phone number already exists!")
-            return render(request, 'signup.html')
+            return render(request, 'signup.html', context)
 
         user = CustomUser.objects.create_user(
             username = username,
@@ -56,7 +62,7 @@ def signup_view(request):
         login(request, user)
         return redirect('home')
 
-    return render(request, 'signup.html')
+    return render(request, 'signup.html', context)
 
 def logout_view(request):
     logout(request)
@@ -94,5 +100,3 @@ def add_admin_view(request):
         field.widget.attrs.setdefault('class', 'formInput')
 
     return render(request, 'add_admin.html', {'form': form})
-
-

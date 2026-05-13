@@ -48,16 +48,6 @@
         {% endif %}
     </nav>
 
-    {% if messages %}
-        <section class="container">
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </section>
-    {% endif %}
-
     {% block content %}
     <main class="container" id="homeContainer">
 
@@ -65,28 +55,6 @@
                 <h1 class="homeText">Welcome to the Online Library</h1>
                 <p class="headerText homeText">Discover a world of knowledge. Search our catalog, borrow your favorite books <br> And manage your reading list all in one place.</p>
             </div>
-        <div>
-
-{#            <div class="cards">#}
-{#                <a href="">#}
-{#                    <img src="{% static 'images/img1.jpg' %}" alt="programming book" class="img">#}
-{#                </a>#}
-{#                <a href="{% url 'search' %}">#}
-{#                    <img src="{% static 'images/img2.jpg' %}" alt="coding book" class="img">#}
-{#                </a>#}
-{#                <a href="{% url 'search' %}">#}
-{#                    <img src="{% static 'images/img3.jpg' %}" alt="literature book" class="img">#}
-{#                </a>#}
-{#                <a href="{% url 'search' %}">#}
-{#                    <img src="{% static 'images/img4.jpg' %}" alt="literature book" class="img">#}
-{#                </a>#}
-{#                <a href="{% url 'search' %}">#}
-{#                    <img src="{% static 'images/img5.jpg' %}" alt="kids coloring book" class="img">#}
-{#                </a>#}
-{##}
-{#            </div>#}
-        </div>
-
     </main>
     {% endblock %}
     <footer>
@@ -105,6 +73,5 @@
         </div>
 
     </footer>
-{#    <script src="{% static 'js/main.js' %}"></script>#}
 </body>
 </html>
