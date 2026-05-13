@@ -23,3 +23,9 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+from django.urls import path
+from . import views 
+
+urlpatterns = [
+    path('book-details/', views.book_details_view, name='book_details'),
+]
