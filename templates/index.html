@@ -21,7 +21,8 @@
             {% if user.is_staff %}
                 <div class="pageOptions">
                     <a href="{% url 'admin_books' %}">Manage Books</a>
-                    <a href=""{% url 'add_book' %}>Add Book</a>
+                    <a href="{% url 'add_book' %}">Add Book</a>
+                    <a href="{% url 'add_admin' %}">Add Admin</a>
                     <a href="{% url 'profile' %}">Profile</a>
                 </div>
 

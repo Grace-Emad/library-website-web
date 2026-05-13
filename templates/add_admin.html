@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<main class="container">
+    <section class="form-container">
+        <h2 class="lobsterFont">Add Admin</h2>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+
+            <label for="{{ form.username.id_for_label }}">Username</label><br>
+            {{ form.username }}<br><br>
+
+            <label for="{{ form.email.id_for_label }}">Email</label><br>
+            {{ form.email }}<br><br>
+
+            <label for="{{ form.phone.id_for_label }}">Phone</label><br>
+            {{ form.phone }}<br><br>
+
+            <label for="{{ form.password1.id_for_label }}">Password</label><br>
+            {{ form.password1 }}<br><br>
+
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label><br>
+            {{ form.password2 }}<br><br>
+
+            {% if form.errors %}
+                <ul class="errorMessages">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if messages %}
+                <ul class="okay_messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <button type="submit" class="btn">Create Admin</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

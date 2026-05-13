@@ -1,132 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/queries.css">
-    <link rel="icon" type="image/x-icon" href="../images/icon.png">
-    <meta charset="UTF-8">
-    <title>Edit Book</title>
-</head>
+{% extends 'index.html' %}
 
-<body>
+{% block content %}
+<main class="container">
+    <section class="form-container">
+        <h2>Edit Book</h2>
 
-    <nav class="navbar">
+        <form method="POST">
+            {% csrf_token %}
 
-        <div class="iconName">
-            <img src="../images/icon.png" alt="icon" width="30px">
+            <label>Book ID</label><br>
+            <input type="text" value="{{ book.id }}" class="formInput" readonly>
+            <br><br>
 
-            <b>
-                <a href="../index.html"
-                   style="color: inherit; text-decoration: none;">
-                    Online Library
-                </a>
-            </b>
-        </div>
+            <label>Book Name</label><br>
+            <input type="text" name="title" value="{{ book.title }}" class="formInput" required>
+            <br><br>
 
-        <ul class="pageOptions" id="navLinks"></ul>
+            <label>Author</label><br>
+            <input type="text" name="author" value="{{ book.author }}" class="formInput" required>
+            <br><br>
 
-        <div id="beforeAuth" class="logContainer hidden">
-            <a href="login.html" class="navbarBtns">Login</a>
-            <a href="signup.html" class="navbarBtns">Sign Up</a>
-        </div>
+            <label>Category</label><br>
+            <select name="category" class="formInput" required>
+                <option value="">Choose Category</option>
+                <option value="Fiction" {% if book.category == "Fiction" %}selected{% endif %}>Fiction</option>
+                <option value="Science" {% if book.category == "Science" %}selected{% endif %}>Science</option>
+                <option value="History" {% if book.category == "History" %}selected{% endif %}>History</option>
+                <option value="Technology" {% if book.category == "Technology" %}selected{% endif %}>Technology</option>
+            </select>
+            <br><br>
 
-        <div id="afterAuth" class="logContainer hidden">
-            <span id="userGreeting" style="margin-right: 15px;"></span>
-            <button id="logOutBtn" class="navbarBtns">Log Out</button>
-        </div>
+            <label>Description</label><br>
+            <textarea name="description" class="formInput" required>{{ book.description }}</textarea>
+            <br><br>
 
-    </nav>
-
-    <main class="container">
-
-        <section class="form-container">
-
-            <h2>Edit Book</h2>
-
-            <form method="POST">
-
-                {% csrf_token %}
-
-                <label>Book ID</label><br>
-
-                <input type="text"
-                       value="{{ book.id }}"
-                       class="formInput"
-                       readonly>
-
-                <br><br>
-
-                <label>Book Name</label><br>
-
-                <input type="text"
-                       name="title"
-                       value="{{ book.title }}"
-                       class="formInput"
-                       required>
-
-                <br><br>
-
-                <label>Author</label><br>
-
-                <input type="text"
-                       name="author"
-                       value="{{ book.author }}"
-                       class="formInput"
-                       required>
-
-                <br><br>
-
-                <label>Category</label><br>
-
-                <select name="category"
-                        class="formInput"
-                        required>
-
-                    <option value="">Choose Category</option>
-
-                    <option value="Fiction"
-                    {% if book.category == "Fiction" %}selected{% endif %}>
-                        Fiction
-                    </option>
-
-                    <option value="Science"
-                    {% if book.category == "Science" %}selected{% endif %}>
-                        Science
-                    </option>
-
-                    <option value="History"
-                    {% if book.category == "History" %}selected{% endif %}>
-                        History
-                    </option>
-
-                    <option value="Technology"
-                    {% if book.category == "Technology" %}selected{% endif %}>
-                        Technology
-                    </option>
-
-                </select>
-
-                <br><br>
-
-                <label>Description</label><br>
-
-                <textarea name="description"
-                          class="formInput"
-                          required>{{ book.description }}</textarea>
-
-                <br><br>
-
-                <button type="submit" class="btn">
-                    Update Book
-                </button>
-
-            </form>
-
-        </section>
-
-    </main>
-
-    <script src="../js/main.js"></script>
-
-</body>
-</html>
+            <button type="submit" class="btn">Update Book</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -37,7 +37,11 @@
             </form>
                 {% if user.is_staff %}
                 <div>
-                <a href="{% url "admin:index" %}" class="btn">Dashboard</a>
+                    <a href="{% url 'admin_books' %}" class="btn">Manage Books</a>
+                </div>
+                <br>
+                <div>
+                    <a href="{% url 'add_admin' %}" class="btn">Add Admin</a>
                 </div>
                 {% endif %}
             </section>

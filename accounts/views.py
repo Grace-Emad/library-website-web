@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 
-from .forms import ProfileForm
+from .forms import AdminCreationForm, ProfileForm
 from .models import CustomUser
 
 
@@ -42,6 +42,7 @@ def signup_view(request):
             return render(request, 'signup.html')
         if CustomUser.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
+            return render(request, 'signup.html')
         if CustomUser.objects.filter(phone=phone).exists():
             messages.error(request, "Phone number already exists!")
             return render(request, 'signup.html')
@@ -74,5 +75,24 @@ def profile_view(request):
 
     return render(request, 'profile.html', {'form': form})
 
+
+@staff_member_required(login_url='login')
+def add_admin_view(request):
+    if request.method == 'POST':
+        form = AdminCreationForm(request.POST)
+        if form.is_valid():
+            admin_user = form.save(commit=False)
+            admin_user.is_staff = True
+            admin_user.is_superuser = False
+            admin_user.save()
+            messages.success(request, f'Admin user "{admin_user.username}" created successfully!')
+            return redirect('add_admin')
+    else:
+        form = AdminCreationForm()
+
+    for field in form.fields.values():
+        field.widget.attrs.setdefault('class', 'formInput')
+
+    return render(request, 'add_admin.html', {'form': form})
 
 

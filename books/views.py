@@ -1,6 +1,5 @@
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from .models import Book
 
@@ -18,9 +17,12 @@ def book_details_view(request, pk):
 def user_borrowed(request):
     return render(request, 'user_borrowed.html')
 
+@staff_member_required(login_url='login')
 def admin_books(request):
-    return render(request, 'admin_books.html')
+    books = Book.objects.all().order_by('title')
+    return render(request, 'admin_books.html', {'books': books})
 # Add Book
+@staff_member_required(login_url='login')
 def add_book(request):
 
     if request.method == "POST":
@@ -43,6 +45,7 @@ def add_book(request):
 
 
 # Edit Book
+@staff_member_required(login_url='login')
 def edit_book(request, id):
 
     book = Book.objects.get(id=id)
