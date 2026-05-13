@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, render, redirect
+
 from .models import Book
 
 # Create your views here.
@@ -8,10 +10,25 @@ def home(request):
     return render(request, 'index.html')
 
 def search_books(request):
-    return render(request, 'search_books.html')
+    query = request.GET.get('q', '').strip()
+    books = Book.objects.all().order_by('title')
+
+    if query:
+        books = books.filter(
+            Q(title__icontains=query) |
+            Q(author__icontains=query) |
+            Q(category__icontains=query)
+        )
+
+    context = {
+        'books': books,
+        'query': query,
+    }
+    return render(request, 'search_books.html', context)
 
 def book_details_view(request, pk):
-    return render(request, 'book_details.html')
+    book = get_object_or_404(Book, pk=pk)
+    return render(request, 'book_details.html', {'book': book})
 
 @login_required
 def user_borrowed(request):

@@ -1,15 +1,18 @@
 {% extends 'index.html' %}
-{% load static %}
-<body>
+
 {% block content %}
+<main class="container">
+    <section class="form-container">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Category:</strong> {{ book.category }}</p>
+        <p><strong>Status:</strong> {{ book.status|title }}</p>
+        <p><strong>Description:</strong></p>
+        <p>{{ book.description }}</p>
 
-    <main class="container">
-        <div id="book-details-container"></div>
-        <div id="borrow-section" style="margin-top: 20px;"></div>
-    </main>
+        <div style="margin-top: 20px;">
+            <a href="{% url 'search' %}" class="btn">Back to Search</a>
+        </div>
+    </section>
+</main>
 {% endblock %}
-    <script src="{% static 'js/user.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
-
-
