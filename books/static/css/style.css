@@ -245,10 +245,12 @@ th {
     color: var(--primary-color);
 }
 
-.profileForm {
+.profile_container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .checkBox-wrapper {
