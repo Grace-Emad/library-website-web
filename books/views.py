@@ -59,3 +59,7 @@ def edit_book(request, id):
         return redirect("edit_book", id=id)
 
     return render(request, "edit_book.html", {"book": book})
+    
+from django.shortcuts import render
+def book_details_view(request):
+    return render(request, 'book_details.html')
