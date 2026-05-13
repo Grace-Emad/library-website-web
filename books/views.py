@@ -11,7 +11,7 @@ def home(request):
 def search_books(request):
     return render(request, 'search_books.html')
 
-def book_details(request):
+def book_details(request, pk):
     return render(request, 'book_details.html')
 
 @login_required
@@ -20,13 +20,6 @@ def user_borrowed(request):
 
 def admin_books(request):
     return render(request, 'admin_books.html')
-@staff_member_required
-def add_book(request):
-    return render(request, 'add_book.html')
-
-@staff_member_required
-def edit_book(request, book_id):
-    return render(request, 'edit_book.html')
 # Add Book
 def add_book(request):
 

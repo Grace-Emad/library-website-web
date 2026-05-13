@@ -13,10 +13,16 @@
 
 body {
     font-family: var(--font-family), sans-serif;
-    background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white overlay */
+    background-blend-mode: lighten;
+    min-height: 100vh;
 }
 
 a {
@@ -41,11 +47,13 @@ p {
 }
 
 .headerText {
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .container {
     max-width: 1000px;
+    min-height: 80vh;
     margin: 0 auto 50px;
     padding: 20px;
     background: white;
@@ -55,8 +63,15 @@ p {
 }
 
 #homeContainer {
-    min-height: 80vh;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100%;
+    max-width: none;
 }
+
+
 
 .navbar {
     display: flex;
@@ -289,8 +304,12 @@ th {
 }
 
 .homeWelcome {
-    margin-bottom: 50px;
+    margin-top: 200px;
     text-align: center;
+}
+
+.homeText{
+    color: var(--primary-color);
 }
 
 .cards {

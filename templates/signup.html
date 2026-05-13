@@ -1,8 +1,9 @@
 {% extends 'index.html' %}
 {% load static %}
 <body>
+    {% block content %}
     <main class="container">
-        {% block content %}
+
         <section class="form-container">
             <div class="headings">
                 <h2 class="lobsterFont">Sign Up</h2>
@@ -37,6 +38,7 @@
                 <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
             </form>
         </section>
-        {% endblock %}
+
     </main>
+    {% endblock %}
 </body>

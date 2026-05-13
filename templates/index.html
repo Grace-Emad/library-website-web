@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Online Library - Home{% endblock %}</title>
 </head>
-<body>
+<body class="background-img">
 
     <nav class="navbar">
         <div class="iconName">
@@ -46,32 +46,38 @@
             </div>
         {% endif %}
     </nav>
-    <main class="container" id="homeContainer">
-        {% block content %}
-        <div class="homeWelcome">
-            <h1>Welcome to the Online Library</h1>
-            <p class="headerText">Discover a world of knowledge. Search our catalog, borrow your favorite books, and manage your reading list all in one place.</p>
-        </div>
-        <div class="cards">
-            <a href="">
-                <img src="{% static 'images/img1.jpg' %}" alt="programming book" class="img">
-            </a>
-            <a href="{% url 'search' %}">
-                <img src="{% static 'images/img2.jpg' %}" alt="coding book" class="img">
-            </a>
-            <a href="{% url 'search' %}">
-                <img src="{% static 'images/img3.jpg' %}" alt="literature book" class="img">
-            </a>
-            <a href="{% url 'search' %}">
-                <img src="{% static 'images/img4.jpg' %}" alt="literature book" class="img">
-            </a>
-            <a href="{% url 'search' %}">
-                <img src="{% static 'images/img5.jpg' %}" alt="kids coloring book" class="img">
-            </a>
 
+    {% block content %}
+    <main class="container" id="homeContainer">
+
+            <div class="homeWelcome">
+                <h1 class="homeText">Welcome to the Online Library</h1>
+                <p class="headerText homeText">Discover a world of knowledge. Search our catalog, borrow your favorite books <br> And manage your reading list all in one place.</p>
+            </div>
+        <div>
+
+{#            <div class="cards">#}
+{#                <a href="">#}
+{#                    <img src="{% static 'images/img1.jpg' %}" alt="programming book" class="img">#}
+{#                </a>#}
+{#                <a href="{% url 'search' %}">#}
+{#                    <img src="{% static 'images/img2.jpg' %}" alt="coding book" class="img">#}
+{#                </a>#}
+{#                <a href="{% url 'search' %}">#}
+{#                    <img src="{% static 'images/img3.jpg' %}" alt="literature book" class="img">#}
+{#                </a>#}
+{#                <a href="{% url 'search' %}">#}
+{#                    <img src="{% static 'images/img4.jpg' %}" alt="literature book" class="img">#}
+{#                </a>#}
+{#                <a href="{% url 'search' %}">#}
+{#                    <img src="{% static 'images/img5.jpg' %}" alt="kids coloring book" class="img">#}
+{#                </a>#}
+{##}
+{#            </div>#}
         </div>
-        {% endblock %}
+
     </main>
+    {% endblock %}
     <footer>
         <div class="footer">
             <div class="iconName">

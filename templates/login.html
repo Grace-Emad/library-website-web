@@ -1,8 +1,9 @@
 {% extends 'index.html' %}
 {% load static %}
 <body>
-    <main class="container">
-        {% block content %}
+{% block content %}
+    <main class="container backgroundImg">
+
         <section class="form-container">
             <h2 class="lobsterFont">Login</h2>
             <form id="loginForm" action="" method="POST" autocomplete="off">
@@ -26,6 +27,7 @@
                 <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
             </form>
         </section>
-        {% endblock %}
+
     </main>
+{% endblock %}
 </body>
