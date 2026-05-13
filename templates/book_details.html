@@ -1,16 +1,15 @@
+{% extends 'index.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <body>
+{% block content %}
 
     <main class="container">
         <div id="book-details-container"></div>
         <div id="borrow-section" style="margin-top: 20px;"></div>
     </main>
-
+{% endblock %}
     <script src="{% static 'js/user.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 
-</html>
+
