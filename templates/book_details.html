@@ -1,39 +1,90 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/queries.css">
-    <link rel="icon" type="image/x-icon" href="../images/icon.png">
     <meta charset="utf-8">
     <title>Book Details</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/icon.png' %}">
 </head>
 
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="iconName">
-            <img src="../images/icon.png" alt="icon" width="30px">
-            <b><a href="../index.html" style="color: inherit; text-decoration: none;">Online Library</a></b>
+            <img src="{% static 'images/icon.png' %}" alt="icon" width="30px">
+            <b><a href="{% url 'home' %}" style="text-decoration:none;">Online Library</a></b>
         </div>
-        <ul class="pageOptions" id="navLinks"></ul>
-        <div id="beforeAuth" class="logContainer hidden">
-            <a href="login.html" class="navbarBtns">Login</a>
-            <a href="signup.html" class="navbarBtns">Sign Up</a>
-        </div>
-        <div id="afterAuth" class="logContainer hidden">
-            <span id="userGreeting" style="margin-right: 15px;"></span>
-            <button id="logOutBtn" class="navbarBtns">Log Out</button>
+
+        <div id="beforeAuth" class="logContainer">
+            <a href="{% url 'login' %}" class="navbarBtns">Login</a>
+            <a href="{% url 'signup' %}" class="navbarBtns">Sign Up</a>
         </div>
     </nav>
 
+    <!-- Content -->
     <main class="container">
-        <div id="book-details-container"></div>
+
+        <div id="book-details-container">
+            <p>Loading book details...</p>
+        </div>
+
         <div id="borrow-section" style="margin-top: 20px;"></div>
+
     </main>
 
-    <script src="../js/user.js"></script>
-    <script src="../js/main.js"></script>
-</body>
+    <!-- JS -->
+    <script src="{% static 'js/user.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const bookId = params.get("id");
+
+        if (!bookId) {
+            document.getElementById("book-details-container").innerHTML =
+                "<p>No book selected</p>";
+        } else {
+
+            fetch(`/api/book/${bookId}/`)
+                .then(res => res.json())
+                .then(data => {
+
+                    document.getElementById("book-details-container").innerHTML = `
+                        <h1>${data.title}</h1>
+                        <p><b>Author:</b> ${data.author}</p>
+                        <p>${data.description}</p>
+                        <p>
+                            <b>Status:</b>
+                            ${data.available ? "Available" : "Not Available"}
+                        </p>
+                    `;
+
+                    if (data.available) {
+                        document.getElementById("borrow-section").innerHTML = `
+                            <button onclick="borrowBook(${bookId})">
+                                Borrow Book
+                            </button>
+                        `;
+                    }
+                });
+        }
+
+       
+        function borrowBook(id) {
+            fetch(`/api/borrow/${id}/`, {
+                method: "POST"
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            });
+        }
+    </script>
+
+</body>
 </html>
