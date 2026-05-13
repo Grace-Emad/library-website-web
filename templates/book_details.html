@@ -1,9 +1,8 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
+{% extends 'index.html' %}
 <body>
-
+{% block content %}
+    {% endblock %}
     <main class="container">
         <div id="book-details-container"></div>
         <div id="borrow-section" style="margin-top: 20px;"></div>
@@ -13,4 +12,4 @@
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 
-</html>
+
